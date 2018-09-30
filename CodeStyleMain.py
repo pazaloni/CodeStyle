@@ -71,9 +71,9 @@ def test_function():
         print '7^0={}'.format(power(7, 0))
         print 'inverse 0.2 = {}'.format(inverse(0.2))
         print 'inverse 10 = {}'.format(inverse(10))
-        # test for errors
+        # ## test for errors, only one test at a time ##
         # print '6/0={}'.format(division(6, 0))
-        print '6/0={}'.format(addition('test', 0.5))
+        # print '6/0={}'.format(addition('test', 0.5))
         # print '6/0={}'.format(power(4, 0.5))
     except ArithmeticError as e:
         print ('An arithmetic error has occurred. {}'.format(e.message))
