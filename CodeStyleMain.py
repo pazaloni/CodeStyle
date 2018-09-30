@@ -1,7 +1,7 @@
 """
 A simple file to demonstrate/represent coding style.
 This file defines several functions to perform some simple arithmetic operations,
-and a 'main' function to demonstrate its use.
+and a 'main' function to test their use.
 """
 
 
@@ -29,27 +29,33 @@ def power(num1, num2):
     """ Return the result of raising num1 to the power of num2 """
     result = 1
 
-    # raise to the power of 0
-    if num2 == 0:
-        return result
-    # raise to a positive number
-    elif num2 > 0:
-        while num2 > 0:
-            result = multiplication(result, num1)
-            num2 = subtraction(num2, 1)
-        return result
+    # raise to a fraction (not implemented)
+    if -1 < num2 < 1 and num2 != 0:
+        raise NotImplementedError('Raising by a fraction is not supported at this time.')
     # raise to a negative number
-    else:
+    elif num2 < 0:
         num2 = multiplication(num2, -1)
         while num2 > 0:
             result = multiplication(result, num1)
             num2 = subtraction(num2, 1)
         return division(1, result)
+    # raise to a positive number or 0
+    else:
+        while num2 > 0:
+            result = multiplication(result, num1)
+            num2 = subtraction(num2, 1)
+        return result
 
 
-def main_function():
+def inverse(num):
+    """ Return the inverse of num """
+    return power(num, -1)
+
+
+def test_function():
     """
-    The main function, called if this file is ran as the main file
+    The main function, called if this file is ran as the main file.
+    The purpose of this function is to test the functions outlined in this file.
     """
     try:
         # run tests/try the functions outlined in this file
@@ -63,12 +69,21 @@ def main_function():
         print '5^3={}'.format(power(5, 3))
         print '5^-3={}'.format(power(5, -3))
         print '7^0={}'.format(power(7, 0))
-        print '6/0={}'.format(division(6, 0))
+        print 'inverse 0.2 = {}'.format(inverse(0.2))
+        print 'inverse 10 = {}'.format(inverse(10))
+        # test for errors
+        # print '6/0={}'.format(division(6, 0))
+        print '6/0={}'.format(addition('test', 0.5))
+        # print '6/0={}'.format(power(4, 0.5))
     except ArithmeticError as e:
         print ('An arithmetic error has occurred. {}'.format(e.message))
+    except NotImplementedError as e:
+        print ('This feature is not yet implemented. {}'.format(e.message))
+    except TypeError as e:
+        print ('Wrong type provided. {}'.format(e.message))
 
     return
 
 
 if __name__ == '__main__':
-    main_function()
+    test_function()
