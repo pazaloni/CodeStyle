@@ -22,7 +22,7 @@ def multiplication(num1, num2):
 
 def division(num1, num2):
     """ Return the result of dividing num1 by num2 """
-    return num1/num2
+    return float(num1)/float(num2)
 
 
 def power(num1, num2):
@@ -35,16 +35,16 @@ def power(num1, num2):
     # raise to a positive number
     elif num2 > 0:
         while num2 > 0:
-            result *= num1
-            num2 -= 1
+            result = multiplication(result, num1)
+            num2 = subtraction(num2, 1)
         return result
     # raise to a negative number
     else:
-        num2 *= -1
+        num2 = multiplication(num2, -1)
         while num2 > 0:
-            result *= num1
-            num2 -= 1
-        return 1/result
+            result = multiplication(result, num1)
+            num2 = subtraction(num2, 1)
+        return division(1, result)
 
 
 def main_function():
@@ -53,9 +53,20 @@ def main_function():
     """
     try:
         # run tests/try the functions outlined in this file
-        print addition(7, 5)
-    except ArithmeticError:
-        print ('An arithmetic error has occurred')
+        print '7+5={}'.format(addition(7, 5))
+        print '2-7={}'.format(subtraction(2, 7))
+        print '7-2={}'.format(subtraction(7, 2))
+        print '5*7={}'.format(multiplication(5, 7))
+        print '5*-7={}'.format(multiplication(5, -7))
+        print '2/4={}'.format(division(2, 4))
+        print '6/2={}'.format(division(6, 2))
+        print '5^3={}'.format(power(5, 3))
+        print '5^-3={}'.format(power(5, -3))
+        print '7^0={}'.format(power(7, 0))
+        print '6/0={}'.format(division(6, 0))
+    except ArithmeticError as e:
+        print ('An arithmetic error has occurred. {}'.format(e.message))
+
     return
 
 
